@@ -18,7 +18,7 @@
 </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 export default {
   data () {
     var checkUser = (rule, value, callback) => {
@@ -63,13 +63,18 @@ export default {
   },
   methods: {
     submitForm (formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
           // 模拟登录操作，2秒后登录成功
-          setTimeout(() => {
-            this.toLogin()
-            this.open2()
-          }, 2000)
+          // setTimeout(() => {
+          //   this.toLogin()
+          //   this.open2()
+          // }, 2000)
+          console.log(new Date())
+          // store.dispatch 可以处理被触发的 action 的处理函数返回的 Promise，并且 store.dispatch 仍旧返回 Promise
+          const userName = await this.login()
+          console.log(`${new Date()} ${userName}`)
+          this.open2()
         } else {
           console.log('error submit!!')
           return false
@@ -93,6 +98,9 @@ export default {
     },
     ...mapMutations([
       'toLogin'
+    ]),
+    ...mapActions([
+      'login'
     ])
   }
 }

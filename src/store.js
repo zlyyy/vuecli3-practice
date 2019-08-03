@@ -19,6 +19,19 @@ export default new Vuex.Store({
     }
   },
   actions: {
-
+    login: async ({ commit, state }) => {
+      const userName = await new Promise((resolve, reject) => {
+        if (state.isLogin) {
+          resolve('zly')
+        } else {
+          setTimeout(() => {
+            console.log(new Date() + ' login success')
+            commit('toLogin')
+            resolve('zly')
+          }, 2000)
+        }
+      })
+      return userName
+    }
   }
 })
