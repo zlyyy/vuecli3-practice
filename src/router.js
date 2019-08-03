@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import NewHome from './views/NewHome.vue'
 import User from './views/User.vue'
 import Profile from './views/Profile.vue'
@@ -20,7 +19,6 @@ export default new Router({
     },
     {
       path: '/home',
-      name: 'newHome',
       component: NewHome,
       children: [
         {
@@ -30,14 +28,13 @@ export default new Router({
         },
         {
           path: '',
-          name: 'homeinfo',
+          name: 'home',
           component: HomeInfo
         }
       ]
     },
     {
       path: '/user',
-      name: 'user',
       component: User,
       children: [{
         path: 'profile',
@@ -51,7 +48,7 @@ export default new Router({
       },
       {
         path: '',
-        name: 'profile',
+        name: 'user',
         component: Profile
       }
       ]
@@ -60,11 +57,6 @@ export default new Router({
       path: '/Login',
       name: 'login',
       component: Login
-    },
-    {
-      path: '/', // 根路由下，加载的就是Home路由组件到根实例的router-view
-      name: 'home', // 命名
-      component: Home
     },
     {
       path: '/about',

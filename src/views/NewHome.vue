@@ -9,7 +9,7 @@
       <router-link to="/user/setting">/user/setting</router-link>
     </div> -->
     <div>this is home</div>
-      <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 

@@ -18,6 +18,7 @@
 </div>
 </template>
 <script>
+import { mapMutations } from 'vuex'
 export default {
   data () {
     var checkUser = (rule, value, callback) => {
@@ -64,7 +65,11 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.open2()
+          // 模拟登录操作，2秒后登录成功
+          setTimeout(() => {
+            this.toLogin()
+            this.open2()
+          }, 2000)
         } else {
           console.log('error submit!!')
           return false
@@ -79,9 +84,16 @@ export default {
         showClose: true,
         message: '恭喜你，登录成功！',
         type: 'success',
-        onClose: () => console.log('提示消失')
+        center: true,
+        onClose: () => {
+          console.log('提示消失')
+          this.$router.go(-1)
+        }
       })
-    }
+    },
+    ...mapMutations([
+      'toLogin'
+    ])
   }
 }
 </script>
